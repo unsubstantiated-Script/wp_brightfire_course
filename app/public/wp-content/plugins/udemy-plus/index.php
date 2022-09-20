@@ -15,7 +15,19 @@
  * Domain Path:       /languages
  */
 
-if(!function_exists('add_action')){
+// Security measures
+if (!function_exists('add_action')) {
     echo 'Seems as if you do not belong here...';
     exit;
 }
+
+//Setup
+//System paths consts need to be defined before including them to avoid errors
+define('UP_PLUGIN_DIR', plugin_dir_path(__FILE__));
+
+//Includes
+//Importing the files we need
+include(UP_PLUGIN_DIR . 'includes/register-blocks.php');
+
+//Hooks
+add_action('init', 'up_register_blocks');
