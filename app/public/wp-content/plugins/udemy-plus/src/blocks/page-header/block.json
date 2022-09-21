@@ -9,8 +9,11 @@
   "attributes": {
     "content": {
       "type": "string",
-      "source": "html",
-      "selector": "h2"
+      "default": ""
+    },
+    "showCategory": {
+      "type": "boolean",
+      "default": false
     }
   },
   "editorScript": "file:./index.js",
