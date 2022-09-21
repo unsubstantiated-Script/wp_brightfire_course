@@ -7,6 +7,9 @@ function up_register_blocks()
         ['name' => 'search-form', 'options' => [
             'render_callback' => 'up_search_form_render_cb'
         ]],
+        ['name' => 'page-header', 'options' => [
+            'render_callback' => 'up_page_header_render_cb'
+        ]],
 
     ];
 
