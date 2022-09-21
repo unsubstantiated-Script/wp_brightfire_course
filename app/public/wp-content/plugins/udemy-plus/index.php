@@ -27,9 +27,18 @@ define('UP_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
 //Includes
 //Importing the files we need
-include(UP_PLUGIN_DIR . 'includes/register-blocks.php');
-include(UP_PLUGIN_DIR . 'includes/blocks/search-form.php');
-include(UP_PLUGIN_DIR . 'includes/blocks/page-header.php');
+//include(UP_PLUGIN_DIR . 'includes/register-blocks.php');
+//include(UP_PLUGIN_DIR . 'includes/blocks/search-form.php');
+//include(UP_PLUGIN_DIR . 'includes/blocks/page-header.php');
+
+//This method eliminates the need for doing the above...
+$rootFiles = glob(UP_PLUGIN_DIR . 'includes/*.php');
+$subdirectoryFiles = glob(UP_PLUGIN_DIR . 'includes/**/*.php');
+$allFiles = array_merge($rootFiles, $subdirectoryFiles);
+
+foreach ($allFiles as $filename) {
+    include_once($filename);
+}
 
 //Hooks
 add_action('init', 'up_register_blocks');
