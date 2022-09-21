@@ -19,7 +19,7 @@ registerBlockType('udemy-plus/page-header', {
                         checked={ showCategory }
                         onChange={ showCategory => setAttributes({ showCategory }) }
                         help={
-                            showCategory ? __('Category Shown', 'udemy=plus') : __('Custom Content Shown', 'udemy=plus')
+                            showCategory ? __('Category Shown', 'udemy-plus') : __('Custom Content Shown', 'udemy-plus')
                         }
                     />
                 </PanelBody>
