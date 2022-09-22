@@ -2,12 +2,6 @@
 
 function up_auth_modal_render_cb($atts)
 {
-    $heading = esc_html($atts['content']);
-
-    if ($atts['showCategory']) {
-        $heading = get_the_archive_title();
-    }
-
     ob_start();
     ?>
     <div class="wp-block-udemy-plus-auth-modal">
@@ -54,22 +48,28 @@ function up_auth_modal_render_cb($atts)
                             <button type="submit">Sign in</button>
                         </fieldset>
                     </form>
-                    <!-- Register Form -->
-                    <form id="signup-tab">
-                        <div id="signup-status"></div>
-                        <fieldset>
-                            <label>Full name</label>
-                            <input type="text" id="su-name" placeholder="John Doe"/>
 
-                            <label>Email address</label>
-                            <input type="email" id="su-email" placeholder="johndoe@example.com"/>
+                    <?php
+                    if ($atts['showRegister']) { ?>
+                        <!-- Register Form -->
+                        <form id="signup-tab">
+                            <div id="signup-status"></div>
+                            <fieldset>
+                                <label>Full name</label>
+                                <input type="text" id="su-name" placeholder="John Doe"/>
 
-                            <label for="su-password">Password</label>
-                            <input type="password" id="su-password"/>
+                                <label>Email address</label>
+                                <input type="email" id="su-email" placeholder="johndoe@example.com"/>
 
-                            <button type="submit">Sign up</button>
-                        </fieldset>
-                    </form>
+                                <label for="su-password">Password</label>
+                                <input type="password" id="su-password"/>
+
+                                <button type="submit">Sign up</button>
+                            </fieldset>
+                        </form>
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>

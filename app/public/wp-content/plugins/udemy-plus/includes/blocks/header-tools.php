@@ -2,11 +2,7 @@
 
 function up_header_tools_render_cb($atts)
 {
-    $heading = esc_html($atts['content']);
 
-    if ($atts['showCategory']) {
-        $heading = get_the_archive_title();
-    }
 
     ob_start();
     ?>
