@@ -2,6 +2,11 @@
 
 function up_auth_modal_render_cb($atts)
 {
+    //Avoid showing the modal if the user is already logged in.
+
+    if(is_user_logged_in()) {
+        return '';
+    }
     ob_start();
     ?>
     <div class="wp-block-udemy-plus-auth-modal">
