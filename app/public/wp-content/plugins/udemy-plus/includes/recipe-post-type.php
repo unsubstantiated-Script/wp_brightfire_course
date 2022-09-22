@@ -45,5 +45,5 @@ function up_recipe_post_type()
         'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
     );
 
-    register_post_type('book', $args);
+    register_post_type('recipe', $args);
 }
