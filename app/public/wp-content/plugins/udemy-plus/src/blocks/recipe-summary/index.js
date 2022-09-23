@@ -3,6 +3,7 @@ import { useBlockProps, RichText } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import { useEntityProp } from '@wordpress/core-data'
 import { useSelect } from '@wordpress/data'
+import { Spinner } from '@wordpress/components'
 import icons from '../../icons.js';
 import './main.css';
 
@@ -20,12 +21,21 @@ registerBlockType('udemy-plus/recipe-summary', {
         //Reminds me of useEffect in the React library...but selection based vs. lifecycle based
         //Actually some Redux going on here...
         // A WP style query
-        const { cuisines } = useSelect((select) => {
-            const { getEntityRecords } = select('core')
-            return {
-                cuisines: getEntityRecords('taxonomy', 'cuisine', {
+        const { cuisines, isLoading } = useSelect((select) => {
+            //isResolving spies on getEntityRecords to see where it is at in the process
+            const { getEntityRecords, isResolving } = select('core')
+
+            const taxonomyArgs = [
+                'taxonomy',
+                'cuisine',
+                {
                     include: termIDs
-                })
+                }
+            ]
+
+            return {
+                cuisines: getEntityRecords(...taxonomyArgs),
+                isLoading: isResolving('getEntityRecords', taxonomyArgs)
             }
         }, [termIDs])
 
@@ -76,6 +86,17 @@ registerBlockType('udemy-plus/recipe-summary', {
                             <div className="recipe-metadata">
                                 <div className="recipe-title">{ __('Cuisine', 'udemy-plus') }</div>
                                 <div className="recipe-data recipe-cuisine">
+                                    { isLoading && <Spinner/> }
+                                    { !isLoading && cuisines && cuisines.map((cuisine, index) => {
+                                        const comma = cuisines[index + 1] ? ',' : ''
+                                        return (
+                                            <>
+                                                <a href={ cuisine.meta.more_info_url }>{ cuisine.name }</a>
+                                                { comma }
+                                                { " " }
+                                            </>
+                                        )
+                                    }) }
                                 </div>
                             </div>
                             <i className="bi bi-egg-fried"></i>
