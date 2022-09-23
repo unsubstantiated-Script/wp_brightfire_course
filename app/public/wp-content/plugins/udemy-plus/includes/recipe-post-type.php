@@ -57,4 +57,12 @@ function up_recipe_post_type()
             'show_in_rest' => true
         ]
     );
+
+    register_term_meta('cuisine', 'more_info_url' , [
+        'type' => 'string',
+        'description' => __('A URL for more information on a cuisine', 'udemy-plus'),
+        'single' => true,
+        'show_in_rest' => true,
+        'default' => '#'
+    ]);
 }
