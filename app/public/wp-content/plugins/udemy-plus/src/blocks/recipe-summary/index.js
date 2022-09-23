@@ -39,7 +39,18 @@ registerBlockType('udemy-plus/recipe-summary', {
             }
         }, [termIDs])
 
-        console.log(cuisines)
+
+//Doing the same as above but getting the rating now...
+        const { rating } = useSelect((select) => {
+            //isResolving spies on getEntityRecords to see where it is at in the process
+            const { getCurrentPostAttribute } = select('core/editor')
+
+            return {
+                rating: getCurrentPostAttribute('meta').recipe_rating
+            }
+        })
+
+        console.log(rating)
 
 
         return (

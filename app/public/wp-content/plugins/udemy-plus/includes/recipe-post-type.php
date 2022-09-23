@@ -42,7 +42,15 @@ function up_recipe_post_type()
         'has_archive' => true,
         'hierarchical' => false,
         'menu_position' => 20,
-        'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
+        'supports' => array(
+            'title',
+            'editor',
+            'author',
+            'thumbnail',
+            'excerpt',
+            'comments',
+            'custom-fields'
+        ),
         'show_in_rest' => true,
         'description' => __('A custom post time for recipes', 'udemy-plus'),
         'taxonomies' => ['category', 'post_tag']
@@ -58,11 +66,19 @@ function up_recipe_post_type()
         ]
     );
 
-    register_term_meta('cuisine', 'more_info_url' , [
+    register_term_meta('cuisine', 'more_info_url', [
         'type' => 'string',
         'description' => __('A URL for more information on a cuisine', 'udemy-plus'),
         'single' => true,
         'show_in_rest' => true,
         'default' => '#'
+    ]);
+
+    register_post_meta('recipe', 'recipe_rating', [
+        'type' => 'number',
+        'description' => __('The rating for a recipe', 'udemy-plus'),
+        'single' => true,
+        'show_in_rest' => true,
+        'default' => '0'
     ]);
 }
