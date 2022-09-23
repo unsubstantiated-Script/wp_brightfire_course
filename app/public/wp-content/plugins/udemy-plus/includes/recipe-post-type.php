@@ -49,4 +49,12 @@ function up_recipe_post_type()
     );
 
     register_post_type('recipe', $args);
+
+    register_taxonomy(
+        'cuisine', 'recipe', [
+            'label' => __('Cuisine', 'udemy-plus'),
+            'rewrite' => ['slug' => 'cuisine'],
+            'show_in_rest' => true
+        ]
+    );
 }
