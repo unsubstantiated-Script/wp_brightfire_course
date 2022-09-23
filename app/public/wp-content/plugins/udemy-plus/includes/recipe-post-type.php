@@ -43,6 +43,9 @@ function up_recipe_post_type()
         'hierarchical' => false,
         'menu_position' => 20,
         'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
+        'show_in_rest' => true,
+        'description' => __('A custom post time for recipes', 'udemy-plus'),
+        'taxonomies' => ['category', 'post_tag']
     );
 
     register_post_type('recipe', $args);
