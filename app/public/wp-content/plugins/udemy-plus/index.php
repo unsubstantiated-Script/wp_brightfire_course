@@ -42,3 +42,4 @@ add_action('edited_cuisine', 'up_save_cuisine_meta');
 add_action('save_post_recipe', 'up_save_post_recipe');
 add_action('after_setup_theme', 'up_setup_theme');
 add_filter('image_size_names_choose', 'up_custom_image_sizes');
+add_filter('rest_recipe_query', 'up_rest_recipe_query', 10, 2);
