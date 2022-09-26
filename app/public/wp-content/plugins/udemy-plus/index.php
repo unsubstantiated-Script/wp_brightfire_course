@@ -58,6 +58,7 @@ add_action('init', 'up_register_assets');
 add_action('admin_init', 'up_settings_api');
 
 add_action('enqueue_block_editor_assets', 'up_enqueue_block_editor_assets');
+add_action('wp_head', 'up_wp_head');
 
 
 
