@@ -52,3 +52,4 @@ add_action('admin_menu', 'up_admin_menus');
 add_action('admin_post_up_save_options', 'up_save_options');
 
 //Gonna add media to the db with this...
+add_action('admin_enqueue_scripts', 'up_admin_enqueue');
