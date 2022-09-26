@@ -56,3 +56,6 @@ add_action('admin_enqueue_scripts', 'up_admin_enqueue');
 
 //For updating images
 add_action('init', 'up_register_assets');
+
+add_action('admin-init', 'up_settings_api');
+
