@@ -53,3 +53,6 @@ add_action('admin_post_up_save_options', 'up_save_options');
 
 //Gonna add media to the db with this...
 add_action('admin_enqueue_scripts', 'up_admin_enqueue');
+
+//For updating images
+add_action('init', 'up_register_assets');
