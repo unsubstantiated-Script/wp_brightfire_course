@@ -12,20 +12,21 @@
  * Domain Path:       /languages
  */
 
-if(!function_exists('add_action')) {
+if (!function_exists('add_action')) {
     echo 'Seems like you stumbled here by accident. 😛';
     exit;
 }
 
 // Setup
 define('UP_PLUGIN_DIR', plugin_dir_path(__FILE__));
+const UP_PLUGIN_FILE = __FILE__;
 
 // Includes
 $rootFiles = glob(UP_PLUGIN_DIR . 'includes/*.php');
 $subdirectoryFiles = glob(UP_PLUGIN_DIR . 'includes/**/*.php');
 $allFiles = array_merge($rootFiles, $subdirectoryFiles);
 
-foreach($allFiles as $filename) {
+foreach ($allFiles as $filename) {
     include_once($filename);
 }
 
@@ -43,3 +44,11 @@ add_action('save_post_recipe', 'up_save_post_recipe');
 add_action('after_setup_theme', 'up_setup_theme');
 add_filter('image_size_names_choose', 'up_custom_image_sizes');
 add_filter('rest_recipe_query', 'up_rest_recipe_query', 10, 2);
+add_action('admin_menu', 'up_admin_menus');
+
+
+
+//Admin form hooks
+add_action('admin_post_up_save_options', 'up_save_options');
+
+//Gonna add media to the db with this...

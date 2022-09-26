@@ -27,5 +27,16 @@ function up_activate_plugin()
     require_once(ABSPATH . "/wp-admin/includes/upgrade.php");
 //    creating DB but also avoids creating multiple tables if user repeatedly activates/deactivates tables.
     dbDelta($sql);
+
+    $options = get_option('up_options');
+
+    if (!$options) {
+        add_option('up_options', [
+            'og_title' => get_bloginfo('name'),
+            'og_image' => '',
+            'og_description' => get_bloginfo('description'),
+            'enable_og' => 1
+        ]);
+    }
 }
 
