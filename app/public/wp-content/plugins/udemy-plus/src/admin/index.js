@@ -1,4 +1,4 @@
-import './main.css'
+import "./main.css";
 
 const ogImgBtn = document.querySelector("#og-img-btn");
 const ogImgCtr = document.querySelector("#og-img-preview");
@@ -7,17 +7,17 @@ const ogImgInput = document.querySelector("#up_og_image");
 const mediaFrame = wp.media({
     title: "Select or Upload Media",
     button: {
-        text: "Select this media",
+        text: "Use this media",
     },
     multiple: false,
 });
 
-ogImgBtn.addEventListener('click', event => {
+ogImgBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    mediaFrame.open()
-})
+    mediaFrame.open();
+});
 
-mediaFrame.on('select', () => {
+mediaFrame.on("select", () => {
     const attachment = mediaFrame.state().get("selection").first().toJSON();
     console.log(attachment);
     ogImgCtr.src = attachment.sizes.opengraph.url;
