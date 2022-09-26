@@ -19,15 +19,17 @@ function up_register_blocks()
         ['name' => 'recipe-summary', 'options' => [
             'render_callback' => 'up_recipe_summary_render_cb'
         ]],
-
-
+        ['name' => 'team-members-group'],
+        ['name' => 'team-member'],
+        ['name' => 'popular-recipes', 'options' => [
+            'render_callback' => 'up_popular_recipes_cb'
+        ]]
     ];
 
     foreach ($blocks as $block) {
-        // Registering the Block we are developing
-        register_block_type(UP_PLUGIN_DIR . 'build/blocks/' . $block['name'],
-            $block['options'] ?? []
+        register_block_type(
+            UP_PLUGIN_DIR . 'build/blocks/' . $block['name'],
+            isset($block['options']) ? $block['options'] : []
         );
     }
-
 }
