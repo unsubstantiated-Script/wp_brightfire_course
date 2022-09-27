@@ -1,24 +1,25 @@
 <?php
 
 
-
 use Elementor\Widget_Base;
 
 /**
  * Have the widget code for the Custom Elementor Nav Menu.
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
     exit;
 }
 
-class Nav_Menu extends Widget_Base {
+class Nav_Menu extends Widget_Base
+{
 
     /**
      * @access public
      * @return string Widget name.
      */
-    public function get_name() {
+    public function get_name()
+    {
         return 'skript-menu';
     }
 
@@ -26,18 +27,21 @@ class Nav_Menu extends Widget_Base {
      * @access public
      * @return string Widget title.
      */
-    public function get_title() {
-        return esc_html__( 'Skript Menu', 'skript-land' );
+    public function get_title()
+    {
+        return esc_html__('Skript Menu', 'skript-land');
     }
 
-    public function get_icon() {
+    public function get_icon()
+    {
         // return 'fa fa-menu';
         return 'eicon-nav-menu';
     }
 
-    public function get_categories() {
-        // TODO: Add out own category in Elementor.
-        return ['skript'];
+    public function get_categories()
+    {
+        // TODO: Add our own category in Elementor.
+        return ['skript-keep'];
 
         // pro-elements
         // woocommerce-elements
@@ -45,20 +49,32 @@ class Nav_Menu extends Widget_Base {
         // basic
     }
 
-    public function _register_control() {
+    public function _register_control()
+    {
 
     }
 
-    protected function render() {
-        ?>
-        <div>Hello widget</div>
-        <?php
+
+    //Font end
+    protected function render()
+    {
+        echo wp_nav_menu(
+            [
+                'container' => '',
+                'menu_class' => 'skript-menu'
+            ]
+        );
     }
 
-    protected function _content_template() {
-        ?>
-        <div>Hello widget</div>
-        <?php
+    //Backend
+    protected function content_template()
+    {
+        echo wp_nav_menu(
+            [
+                'container' => '',
+                'menu_class' => 'skript-menu',
+            ]
+        );
     }
 
 }
