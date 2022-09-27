@@ -44,11 +44,10 @@ add_action('save_post_recipe', 'up_save_post_recipe');
 add_action('after_setup_theme', 'up_setup_theme');
 add_filter('image_size_names_choose', 'up_custom_image_sizes');
 add_filter('rest_recipe_query', 'up_rest_recipe_query', 10, 2);
-add_action('admin_menu', 'up_admin_menus');
-
 
 
 //Admin form hooks
+add_action('admin_menu', 'up_admin_menus');
 add_action('admin_post_up_save_options', 'up_save_options');
 
 //Gonna add media to the db with this...
@@ -56,3 +55,14 @@ add_action('admin_enqueue_scripts', 'up_admin_enqueue');
 
 //For updating images
 add_action('init', 'up_register_assets');
+add_action('admin_init', 'up_settings_api');
+
+add_action('enqueue_block_editor_assets', 'up_enqueue_block_editor_assets');
+add_action('wp_head', 'up_wp_head');
+
+//Loading translations
+add_action('plugins_loaded', 'up_load_php_translations');
+add_action('wp_enqueue_scripts', 'up_load_block_translations', 100);
+
+
+
