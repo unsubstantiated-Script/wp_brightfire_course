@@ -26,3 +26,7 @@ node_modules/
 
 # ignore the React build file
 build/
+
+
+# File needs to go in wp-content/themes/udemy/includes directory. Can be obtained at...http://tgmpluginactivation.com/
+class-tgm-plugin-activation.php
