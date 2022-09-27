@@ -1,0 +1,9 @@
+.skript-menu {
+    background: red;
+    color: white;
+    display: inline-block;
+}
+
+.skript-menu ul li {
+    margin: 0 20px;
+}
