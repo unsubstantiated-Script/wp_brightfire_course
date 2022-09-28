@@ -25,6 +25,13 @@ class VanillaPlugin
         add_action('init', [$this, 'custom_post_type']);
     }
 
+
+    function register()
+    {
+        add_action('admin_enqueue_scripts', [$this, 'enqueue']);
+    }
+
+
     function activate()
     {
         //Generate a Custom Post Type
@@ -50,11 +57,18 @@ class VanillaPlugin
         register_post_type('book', ['public' => true, 'label' => 'Vanilla Books']);
     }
 
+    function enqueue()
+    {
+       wp_enqueue_style('vanilla-style', plugins_url('/assets/main.css', __FILE__));
+       wp_enqueue_script('vanilla-script', plugins_url('/assets/main.js', __FILE__));
+    }
+
 
 }
 
 if (class_exists('VanillaPlugin')) {
     $vanillaPlugin = new VanillaPlugin('We are good to go Red Leader');
+    $vanillaPlugin->register();
 }
 
 // activation
