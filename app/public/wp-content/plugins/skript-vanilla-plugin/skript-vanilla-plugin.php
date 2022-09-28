@@ -1,5 +1,9 @@
 <?php
 /**
+ *
+ * @package VanillaBooks
+ * /
+ * /*
  * Plugin Name: Skript Vanilla
  * Plugin URI: https://www.unsubstantiatedscript.com/
  * Description: A vanilla WP Plugin to test things out
@@ -21,10 +25,13 @@ class VanillaPlugin
         add_action('init', [$this, 'custom_post_type']);
     }
 
- function activate()
+    function activate()
     {
         //Generate a Custom Post Type
         //Flush Rewrite Rules
+
+        $this->custom_post_type();
+        flush_rewrite_rules();
     }
 
     function deactivate()
@@ -32,15 +39,15 @@ class VanillaPlugin
         //Flush Rewrite Rules
     }
 
-    function uninstall()
-    {
-        // Delete Custom Post Type
-        // Delete all the plugin data from the DB
-    }
+//    function uninstall()
+//    {
+//        // Delete Custom Post Type
+//        // Delete all the plugin data from the DB
+//    }
 
     function custom_post_type()
     {
-        register_post_type('book', ['public' => 'true']);
+        register_post_type('book', ['public' => true, 'label' => 'Vanilla Books']);
     }
 
 
@@ -57,4 +64,10 @@ register_activation_hook(__FILE__, [$vanillaPlugin, 'activate']);
 // deactivation
 register_deactivation_hook(__FILE__, [$vanillaPlugin, 'deactivate']);
 
+
+
 // uninstall
+// This requires a static method in the class...
+//register_uninstall_hook(__FILE__, [$vanillaPlugin, 'uninstall']);
+
+
