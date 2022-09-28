@@ -14,6 +14,14 @@ if (!defined('ABSPATH')) {
 class Nav_Menu extends Widget_Base
 {
 
+
+    public function __construct($data = [], $args = null)
+    {
+        parent::__construct($data, $args);
+        wp_enqueue_script('skript-keep-menu-js',plugin_dir_url(__FILE__) . '../assets/js/menu.js');
+        wp_enqueue_style('skript-keep-menu-css', plugin_dir_url(__FILE__) . '../assets/css/menu.css');
+    }
+
     /**
      * @access public
      * @return string Widget name.
@@ -52,6 +60,16 @@ class Nav_Menu extends Widget_Base
     public function _register_control()
     {
 
+    }
+
+    public function get_style_depends()
+    {
+        return ['skript-keep-menu-css'];
+    }
+
+    public function get_script_depends()
+    {
+        return ['skript-keep-menu-js'];
     }
 
 
