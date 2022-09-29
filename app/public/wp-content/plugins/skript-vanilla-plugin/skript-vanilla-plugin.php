@@ -14,37 +14,66 @@
 
 defined('ABSPATH') or die('I\'m sorry Dave, I can\'t do that\!');
 
+if(file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
+    require_once dirname(__FILE__) . '/vendor/autoload.php';
+}
+
+
 
 class VanillaPlugin
 {
 
+    public $plugin;
+
 //This is really useful when you want to update or wipe the DB of the installation...
     function __construct()
     {
-        // OOP way of instantiating the add_action...
-        add_action('init', [$this, 'custom_post_type']);
+        $this->plugin = plugin_basename(__FILE__);
+//        // OOP way of instantiating the add_action...
+//        add_action('init', [$this, 'custom_post_type']);
     }
 
 
+    //For frontend area
     function register()
     {
         add_action('admin_enqueue_scripts', [$this, 'enqueue']);
+        add_action('admin_menu', [$this, 'add_admin_pages']);
+
+
+        add_filter("plugin_action_links_$this->plugin", [$this, 'settings_link']);
     }
 
-
-    function activate()
+    public function add_admin_pages()
     {
-        //Generate a Custom Post Type
-        //Flush Rewrite Rules
-
-        $this->custom_post_type();
-        flush_rewrite_rules();
+        add_menu_page('Vanilla Skript Plugin', 'Nilla Killa', 'manage_options', 'skript_nilla_plugin', [$this, 'admin_index'],
+            'dashicons-buddicons-replies', null
+        );
     }
 
-    function deactivate()
+    function create_post_type()
     {
-        //Flush Rewrite Rules
+        add_action('init', [$this, 'custom_post_type']);
     }
+
+    public function admin_index()
+    {
+        require_once plugin_dir_path(__FILE__) . 'templates/admin.php';
+    }
+
+    public function settings_link($links)
+    {
+        $settings_link = '<a href="options-general.php?page=skript_nilla_plugin">Set it up!</a>';
+        $links[] = $settings_link;
+        return $links;
+    }
+
+    //For frontend area
+//    function register_frontend_scripts()
+//    {
+//        add_action('wp_enqueue_scripts', [$this, 'enqueue']);
+//    }
+
 
 //    function uninstall()
 //    {
@@ -59,9 +88,10 @@ class VanillaPlugin
 
     function enqueue()
     {
-       wp_enqueue_style('vanilla-style', plugins_url('/assets/main.css', __FILE__));
-       wp_enqueue_script('vanilla-script', plugins_url('/assets/main.js', __FILE__));
+        wp_enqueue_style('vanilla-style', plugins_url('/assets/main.css', __FILE__));
+        wp_enqueue_script('vanilla-script', plugins_url('/assets/main.js', __FILE__));
     }
+
 
 
 }
@@ -72,11 +102,13 @@ if (class_exists('VanillaPlugin')) {
 }
 
 // activation
-register_activation_hook(__FILE__, [$vanillaPlugin, 'activate']);
+//require_once plugin_dir_path(__FILE__) . 'includes / plugin - activate . php';
+register_activation_hook(__FILE__, ['Inc\Activate', 'activate']);
 
 
 // deactivation
-register_deactivation_hook(__FILE__, [$vanillaPlugin, 'deactivate']);
+//require_once plugin_dir_path(__FILE__) . 'includes / plugin - deactivate . php';
+register_deactivation_hook(__FILE__, ['Inc\Deactivate', 'deactivate']);
 
 
 

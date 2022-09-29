@@ -1,0 +1,19 @@
+{
+    "name": "justin/skript-vanilla-plugin",
+    "description": "Testing plugin",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Justin Fulton",
+            "email": "justin@brightfire.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Inc\\": "./includes"
+        }
+    }
+}
