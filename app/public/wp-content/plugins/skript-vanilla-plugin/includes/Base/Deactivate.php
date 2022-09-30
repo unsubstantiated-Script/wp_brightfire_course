@@ -12,7 +12,7 @@
  * Author URI: https://www.unsubstantiatedscript.com/
  **/
 
-namespace Inc;
+namespace Inc\Base;
 
 class Deactivate
 {
